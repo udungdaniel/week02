@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
-// All links are relative to the basePath, so they work on GitHub Pages
+// All links are relative to the basePath
 const links = [
   { name: 'Home', href: 'dashboard', icon: HomeIcon },
   { name: 'Invoices', href: 'dashboard/invoices', icon: DocumentDuplicateIcon },
@@ -16,13 +16,18 @@ const links = [
 ];
 
 export default function NavLinks() {
-  const pathname = usePathname();
+  const pathname = usePathname() || '';
+
+  // Strip /week02 from pathname to correctly detect active links
+  const basePath = '/week02';
+  const currentPath = pathname.startsWith(basePath)
+    ? pathname.slice(basePath.length + 1) // remove /week02/
+    : pathname;
 
   return (
     <>
       {links.map((link) => {
         const LinkIcon = link.icon;
-        // Relative href ensures it works with basePath
         return (
           <Link
             key={link.name}
@@ -30,7 +35,7 @@ export default function NavLinks() {
             className={clsx(
               'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'bg-sky-100 text-blue-600': pathname?.endsWith(link.href),
+                'bg-sky-100 text-blue-600': currentPath === link.href,
               }
             )}
           >
