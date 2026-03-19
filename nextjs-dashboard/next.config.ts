@@ -1,9 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: 'export',       // Enables static export
-  basePath: '/week02',    // All routes served under /week02
-  assetPrefix: '/week02/',// Fixes CSS/JS/assets paths
+  output: 'export',       // static export
+  basePath: '/week02',    // all routes served under /week02
+  assetPrefix: '/week02/',// fixes CSS/JS/fonts/assets paths
 };
 
 export default nextConfig;
