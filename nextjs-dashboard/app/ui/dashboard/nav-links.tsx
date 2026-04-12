@@ -1,4 +1,5 @@
 'use client';
+
 import {
   UserGroupIcon,
   HomeIcon,
@@ -8,21 +9,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
-// All links are relative to the basePath
+// Define the navigation links here
 const links = [
-  { name: 'Home', href: 'dashboard', icon: HomeIcon },
-  { name: 'Invoices', href: 'dashboard/invoices', icon: DocumentDuplicateIcon },
-  { name: 'Customers', href: 'dashboard/customers', icon: UserGroupIcon },
+  { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  { name: 'Customers', href: '/dashboard/customers', icon: DocumentDuplicateIcon },
+  { name: 'Invoices', href: '/dashboard/invoices', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
-  const pathname = usePathname() || '';
-
-  // Strip /week02 from pathname to correctly detect active links
-  const basePath = '/week02';
-  const currentPath = pathname.startsWith(basePath)
-    ? pathname.slice(basePath.length + 1) // remove /week02/
-    : pathname;
+  const pathname = usePathname();
 
   return (
     <>
@@ -35,7 +30,7 @@ export default function NavLinks() {
             className={clsx(
               'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'bg-sky-100 text-blue-600': currentPath === link.href,
+                'bg-sky-100 text-blue-600': pathname === link.href,
               }
             )}
           >

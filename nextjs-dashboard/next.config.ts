@@ -1,7 +1,7 @@
-const nextConfig = {
-  output: 'export',         // Static export
-  basePath: '/week02',      // Your GitHub Pages subfolder
-  assetPrefix: '/week02/',  // Prepend /week02/ to all assets
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  /* config options here */
 };
 
 export default nextConfig;
